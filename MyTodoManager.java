@@ -4,6 +4,10 @@ import java.awt.*;
 
 public class MyTodoManager extends JFrame{
 
+    String[] sidebarButtons = {"All Tasks","Completed","Pending","Important"};
+    String[] priorities = {"High","Medium","Low"};
+    String[] defaultTasks = {"Finish Java Assignment","Prepare Networking Notes"};
+
     public MyTodoManager(){
 
         setTitle("My ToDo Manager");
@@ -11,6 +15,7 @@ public class MyTodoManager extends JFrame{
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
+        // HEADER
         JPanel header = new JPanel();
         header.setBackground(new Color(170,190,220));
 
@@ -20,36 +25,29 @@ public class MyTodoManager extends JFrame{
         header.add(title);
         add(header,BorderLayout.NORTH);
 
+        // SIDEBAR
         JPanel sidebar = new JPanel(new FlowLayout(FlowLayout.LEFT,10,20));
         sidebar.setPreferredSize(new Dimension(120,0));
 
         Dimension btnSize = new Dimension(100,30);
 
-        JButton allBtn = new JButton("All Tasks");
-        JButton completedBtn = new JButton("Completed");
-        JButton pendingBtn = new JButton("Pending");
-        JButton importantBtn = new JButton("Important");
-
-        allBtn.setPreferredSize(btnSize);
-        completedBtn.setPreferredSize(btnSize);
-        pendingBtn.setPreferredSize(btnSize);
-        importantBtn.setPreferredSize(btnSize);
-
-        sidebar.add(allBtn);
-        sidebar.add(completedBtn);
-        sidebar.add(pendingBtn);
-        sidebar.add(importantBtn);
+        for(String b : sidebarButtons){
+            JButton btn = new JButton(b);
+            btn.setPreferredSize(btnSize);
+            sidebar.add(btn);
+        }
 
         add(sidebar,BorderLayout.WEST);
 
+        // CENTER PANEL
         JPanel center = new JPanel(new BorderLayout());
-        
+
+        // INPUT PANEL
         JPanel inputPanel = new JPanel();
 
         JLabel taskLabel = new JLabel("Task:");
         JTextField taskField = new JTextField(20);
 
-        String priorities[] = {"High","Medium","Low"};
         JComboBox<String> priorityBox = new JComboBox<>(priorities);
 
         JButton addBtn = new JButton("Add Task");
@@ -61,37 +59,35 @@ public class MyTodoManager extends JFrame{
         inputPanel.add(addBtn);
 
         center.add(inputPanel,BorderLayout.NORTH);
-        
+
+        // TASK PANEL
         JPanel taskPanel = new JPanel();
         taskPanel.setLayout(new BoxLayout(taskPanel,BoxLayout.Y_AXIS));
-
         taskPanel.setBorder(new LineBorder(Color.GRAY));
 
-        JPanel task1 = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        JCheckBox t1 = new JCheckBox("Finish Java Assignment");
-        JButton del1 = new JButton("Delete");
-        del1.setBackground(new Color(240,150,150));
-
-        task1.add(t1);
-        task1.add(del1);
-        
-        JPanel task2 = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        JCheckBox t2 = new JCheckBox("Prepare Networking Notes");
-        JButton del2 = new JButton("Delete");
-        del2.setBackground(new Color(240,150,150));
-
-        task2.add(t2);
-        task2.add(del2);
-
         taskPanel.add(Box.createVerticalStrut(20));
-        taskPanel.add(task1);
-        taskPanel.add(Box.createVerticalStrut(120));
-        taskPanel.add(task2);
+
+        for(String task : defaultTasks){
+
+            JPanel row = new JPanel(new FlowLayout(FlowLayout.LEFT));
+
+            JCheckBox taskCheck = new JCheckBox(task);
+
+            JButton deleteBtn = new JButton("Delete");
+            deleteBtn.setBackground(new Color(240,150,150));
+
+            row.add(taskCheck);
+            row.add(deleteBtn);
+
+            taskPanel.add(row);
+            taskPanel.add(Box.createVerticalStrut(120));
+        }
 
         center.add(taskPanel,BorderLayout.CENTER);
 
         add(center,BorderLayout.CENTER);
 
+        // FOOTER
         JPanel footer = new JPanel();
         JLabel footerLabel = new JLabel("Developed using Java Swing");
 
