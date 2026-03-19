@@ -7,6 +7,7 @@ public class StudentDashboardUI extends JFrame{
     String[] genderOptions = {"Male", "Female"};
     String[] skills = {"Java", "Python", "C++"};
     String[] courses = {"B.Tech", "M.Tech", "B.Sc", "M.Sc"};
+    String[] hobbies = {"Reading", "Gaming", "Sports", "Music", "Travel"};
 
     public StudentDashboardUI(){
 
@@ -99,10 +100,18 @@ public class StudentDashboardUI extends JFrame{
         row5.add(courseLabel);
         row5.add(courseBox);
 
-        // ROW 6 - BUTTON
-        JPanel row6 = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        // ROW 6 - HOBBIES
+        JPanel row6 = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JLabel hobbyLabel = new JLabel("Hobbies:");
+        JComboBox<String> hobbyBox = new JComboBox<>(hobbies);
+
+        row6.add(hobbyLabel);
+        row6.add(hobbyBox);
+
+        // ROW 7 - REGISTER BUTTON
+        JPanel row7 = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         JButton registerBtn = new JButton("Register");
-        row6.add(registerBtn);
+        row7.add(registerBtn);
 
         // ADD ROWS
         formPanel.add(row1);
@@ -111,6 +120,7 @@ public class StudentDashboardUI extends JFrame{
         formPanel.add(row4);
         formPanel.add(row5);
         formPanel.add(row6);
+        formPanel.add(row7);
 
         add(formPanel, BorderLayout.CENTER);
     }
