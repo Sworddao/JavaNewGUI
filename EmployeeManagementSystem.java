@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import javax.swing.*;
 import java.awt.event.*;
 
-public class EmployeeManagementTemplate extends JFrame {
+public class EmployeeManagementSystem extends JFrame {
 
     // UI Components
     private JLabel headerLabel;
@@ -16,7 +16,7 @@ public class EmployeeManagementTemplate extends JFrame {
     private JLabel statusLabel;
     private ArrayList<Employee> employees=new ArrayList<>();
     private int count;
-    public EmployeeManagementTemplate() {
+    public EmployeeManagementSystem() {
       setTitle("Employee Management System");
       setLayout(new BorderLayout());
       setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -203,9 +203,9 @@ public class EmployeeManagementTemplate extends JFrame {
       salaryField.addKeyListener(new KeyAdapter(){
           @Override
           public void keyTyped(KeyEvent e){
-              char c=e.getKeyChar();
-              if(!(Character.isDigit(c) || c=='.')){
-                  e.consume();
+              char c = e.getKeyChar();
+              if(!(Character.isDigit(c) && c == '.')){
+                  e.consume(); //block the words & other keys except digits and dot
               }
           }
       });
@@ -368,6 +368,6 @@ public class EmployeeManagementTemplate extends JFrame {
         displayArea.setText("");
     }
     public static void main(String[] args) {
-      SwingUtilities.invokeLater(() -> new EmployeeManagementTemplate());
+      SwingUtilities.invokeLater(() -> new EmployeeManagementSystem());
     }
 }
